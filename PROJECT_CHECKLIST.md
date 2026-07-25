@@ -331,7 +331,7 @@ Nguồn yêu cầu bắt buộc:
 - [x] `docker-compose.yml` chạy PostgreSQL.
 - [x] `docker-compose.yml` chạy Redis.
 - [x] `docker-compose.yml` chạy MinIO.
-- [ ] `docker-compose.yml` chạy backend.
+- [x] `docker-compose.yml` chạy backend.
 - [ ] `docker-compose.yml` chạy frontend.
 - [ ] `docker-compose.yml` chạy video worker.
 - [x] Healthcheck cho service quan trọng.

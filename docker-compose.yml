@@ -1,4 +1,28 @@
 services:
+  backend:
+    build:
+      context: ./backend
+    container_name: vinaclipai-backend
+    restart: unless-stopped
+    environment:
+      BACKEND_PORT: 8081
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-vinaclipai}
+      POSTGRES_USER: ${POSTGRES_USER:-vinaclipai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vinaclipai_dev_password}
+    ports:
+      - "${BACKEND_PORT:-8081}:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8081/api/health >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
   postgres:
     image: postgres:16-alpine
     container_name: vinaclipai-postgres
