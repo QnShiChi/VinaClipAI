@@ -52,45 +52,45 @@ Nguồn yêu cầu bắt buộc:
 
 ### 4.1. Chuẩn code và phân tầng
 
-- [ ] Backend dùng Java + Spring Boot.
+- [x] Backend dùng Java + Spring Boot.
 - [ ] Tuân thủ SOLID, dependency inversion và separation of concerns.
-- [ ] Controller chỉ xử lý HTTP request/response, validation entrypoint và gọi service.
-- [ ] Service interface định nghĩa nghiệp vụ.
+- [x] Controller chỉ xử lý HTTP request/response, validation entrypoint và gọi service.
+- [x] Service interface định nghĩa nghiệp vụ.
 - [ ] Service implementation chứa logic nghiệp vụ, transaction, kiểm tra quyền, state transition.
 - [ ] Repository interface định nghĩa thao tác dữ liệu.
 - [ ] Repository implementation hoặc Spring Data adapter được tách khỏi service.
 - [ ] DTO request tách khỏi entity database.
-- [ ] DTO response tách khỏi entity database.
+- [x] DTO response tách khỏi entity database.
 - [ ] Mapper tách riêng để chuyển đổi entity/domain/DTO.
-- [ ] Exception handling tập trung qua global exception handler.
+- [x] Exception handling tập trung qua global exception handler.
 - [ ] Validation dùng annotation và validator riêng cho nghiệp vụ phức tạp.
-- [ ] Không trả entity JPA trực tiếp ra API.
-- [ ] Không để controller gọi repository trực tiếp.
+- [x] Không trả entity JPA trực tiếp ra API.
+- [x] Không để controller gọi repository trực tiếp.
 - [ ] Không để service phụ thuộc trực tiếp vào provider AI/TTS/STT cụ thể.
 
 ### 4.2. Package convention đề xuất
 
-- [ ] `controller`: REST controllers.
-- [ ] `service`: service interfaces.
-- [ ] `service.impl`: service implementations.
-- [ ] `repository`: repository interfaces.
-- [ ] `repository.impl`: custom repository implementations/adapters khi cần.
-- [ ] `entity`: JPA entities.
-- [ ] `dto.request`: request DTOs.
-- [ ] `dto.response`: response DTOs.
-- [ ] `mapper`: entity/domain/DTO mappers.
-- [ ] `config`: Spring/security/storage/queue configs.
-- [ ] `security`: auth, RBAC, permission evaluation.
-- [ ] `exception`: domain exceptions and handlers.
-- [ ] `audit`: audit logging components.
-- [ ] `workflow`: state machine/state transition policies.
-- [ ] `integration`: clients gọi Video Worker, AI providers, object storage.
+- [x] `controller`: REST controllers.
+- [x] `service`: service interfaces.
+- [x] `service.impl`: service implementations.
+- [x] `repository`: repository interfaces.
+- [x] `repository.impl`: custom repository implementations/adapters khi cần.
+- [x] `entity`: JPA entities.
+- [x] `dto.request`: request DTOs.
+- [x] `dto.response`: response DTOs.
+- [x] `mapper`: entity/domain/DTO mappers.
+- [x] `config`: Spring/security/storage/queue configs.
+- [x] `security`: auth, RBAC, permission evaluation.
+- [x] `exception`: domain exceptions and handlers.
+- [x] `audit`: audit logging components.
+- [x] `workflow`: state machine/state transition policies.
+- [x] `integration`: clients gọi Video Worker, AI providers, object storage.
 
 ### 4.3. Database PostgreSQL
 
-- [ ] Dùng PostgreSQL cho dữ liệu nghiệp vụ.
-- [ ] Dùng migration tool như Flyway hoặc Liquibase.
-- [ ] Mọi schema change phải có migration.
+- [x] Dùng PostgreSQL cho dữ liệu nghiệp vụ.
+- [x] Dùng migration tool như Flyway hoặc Liquibase.
+- [x] Mọi schema change phải có migration.
 - [ ] Index cho các trường tìm kiếm chính: organization, status, created_at, activity type, owner, reviewer, approver.
 - [ ] Không lưu file media trực tiếp trong database; chỉ lưu metadata và object key.
 - [ ] Có soft delete cho dữ liệu nghiệp vụ cần khôi phục.
@@ -342,7 +342,7 @@ Nguồn yêu cầu bắt buộc:
 - [x] Makefile có `make down`.
 - [x] Makefile có `make logs`.
 - [x] Makefile có `make ps`.
-- [ ] Makefile có `make backend-test`.
+- [x] Makefile có `make backend-test`.
 - [ ] Makefile có `make frontend-test`.
 - [ ] Makefile có `make worker-test`.
 - [x] Makefile có `make test`.
@@ -389,7 +389,7 @@ Nguồn yêu cầu bắt buộc:
 
 ## 11. Kiểm thử
 
-- [ ] Unit test backend service.
+- [x] Unit test backend service.
 - [ ] Unit test backend validator.
 - [ ] Unit test backend mapper.
 - [ ] Integration test repository/database.
@@ -433,8 +433,8 @@ Nguồn yêu cầu bắt buộc:
 
 - [x] Docker Compose PostgreSQL/Redis/MinIO.
 - [x] Makefile.
-- [ ] Spring Boot scaffold.
-- [ ] Migration baseline.
+- [x] Spring Boot scaffold.
+- [x] Migration baseline.
 - [ ] Auth/RBAC.
 - [ ] Organization/User/Role/Permission.
 - [ ] Audit log.
