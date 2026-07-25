@@ -1,24 +1,79 @@
-x-common-volumes: &common-volumes
-  - ./:/MoneyPrinterTurbo
-
 services:
-  webui:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: "moneyprinterturbo-webui"
+  postgres:
+    image: postgres:16-alpine
+    container_name: vinaclipai-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-vinaclipai}
+      POSTGRES_USER: ${POSTGRES_USER:-vinaclipai}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vinaclipai_dev_password}
     ports:
-      - "127.0.0.1:8501:8501"
-    command: [ "streamlit", "run", "./webui/Main.py", "--server.address=0.0.0.0", "--server.port=8501", "--browser.serverAddress=127.0.0.1", "--server.enableCORS=True", "--browser.gatherUsageStats=False", "--client.toolbarMode=minimal", "--logger.hideWelcomeMessage=True", "--server.showEmailPrompt=False" ]
-    volumes: *common-volumes
-    restart: always
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: "moneyprinterturbo-api"
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    container_name: vinaclipai-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
     ports:
-      - "127.0.0.1:8080:8080"
-    command: [ "python3", "main.py" ]
-    volumes: *common-volumes
-    restart: always
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  minio:
+    image: minio/minio:latest
+    container_name: vinaclipai-minio
+    restart: unless-stopped
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-vinaclipai}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-vinaclipai_minio_dev_password}
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: vinaclipai-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-vinaclipai}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-vinaclipai_minio_dev_password}
+      MINIO_BUCKET_MEDIA: ${MINIO_BUCKET_MEDIA:-vinaclipai-media}
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        mc alias set local http://minio:9000 "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}"
+        mc mb --ignore-existing "local/$${MINIO_BUCKET_MEDIA}"
+        mc anonymous set none "local/$${MINIO_BUCKET_MEDIA}"
+    restart: "no"
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

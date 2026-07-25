@@ -29,24 +29,24 @@ Nguồn yêu cầu bắt buộc:
 - [ ] Frontend chỉ gọi Core Backend, không gọi trực tiếp Video Worker.
 - [ ] Core Backend điều phối nghiệp vụ, workflow, phân quyền, audit và job.
 - [ ] Video Worker chỉ xử lý AI/media/render qua API nội bộ hoặc queue.
-- [ ] Object Storage dùng MinIO/S3-compatible cho ảnh, video, audio, subtitle, thumbnail và output.
-- [ ] PostgreSQL là database nghiệp vụ chính.
-- [ ] Redis dùng cho queue/cache/progress/lock/retry nếu phù hợp.
-- [ ] Docker Compose quản lý các service local/dev.
+- [x] Object Storage dùng MinIO/S3-compatible cho ảnh, video, audio, subtitle, thumbnail và output.
+- [x] PostgreSQL là database nghiệp vụ chính.
+- [x] Redis dùng cho queue/cache/progress/lock/retry nếu phù hợp.
+- [x] Docker Compose quản lý các service local/dev.
 - [ ] Makefile cung cấp lệnh chạy, build, test, migrate, logs, clean theo chuẩn thống nhất.
 - [ ] Viết ADR khi có quyết định kỹ thuật khác đặc tả.
 
 ## 3. Cấu trúc repository mục tiêu
 
-- [ ] Tạo thư mục `frontend/` cho React + TypeScript.
-- [ ] Tạo thư mục `backend/` cho Spring Boot.
+- [x] Tạo thư mục `frontend/` cho React + TypeScript.
+- [x] Tạo thư mục `backend/` cho Spring Boot.
 - [ ] Tái định vị phần MoneyPrinterTurbo hiện tại thành worker hoặc module Python có ranh giới rõ.
-- [ ] Tạo `infra/` hoặc `deploy/` cho Docker, compose, scripts triển khai.
-- [ ] Tạo `docs/architecture/` cho tài liệu kiến trúc.
-- [ ] Tạo `docs/api/` cho OpenAPI/API contract.
-- [ ] Tạo `docs/runbooks/` cho vận hành, backup, restore, incident.
-- [ ] Tạo `docs/security/` cho threat model và chính sách dữ liệu.
-- [ ] Tạo `docs/testing/` cho test strategy.
+- [x] Tạo `infra/` hoặc `deploy/` cho Docker, compose, scripts triển khai.
+- [x] Tạo `docs/architecture/` cho tài liệu kiến trúc.
+- [x] Tạo `docs/api/` cho OpenAPI/API contract.
+- [x] Tạo `docs/runbooks/` cho vận hành, backup, restore, incident.
+- [x] Tạo `docs/security/` cho threat model và chính sách dữ liệu.
+- [x] Tạo `docs/testing/` cho test strategy.
 
 ## 4. Backend Spring Boot
 
@@ -95,8 +95,8 @@ Nguồn yêu cầu bắt buộc:
 - [ ] Không lưu file media trực tiếp trong database; chỉ lưu metadata và object key.
 - [ ] Có soft delete cho dữ liệu nghiệp vụ cần khôi phục.
 - [ ] Có retention policy cho media, log và bản nháp.
-- [ ] Database local chạy bằng Docker để kết nối qua DBeaver.
-- [ ] README phải ghi rõ host, port, database, username, password dev.
+- [x] Database local chạy bằng Docker để kết nối qua DBeaver.
+- [x] README phải ghi rõ host, port, database, username, password dev.
 - [ ] Không commit credential production.
 
 ### 4.4. Auth, RBAC và organization scope
@@ -328,28 +328,28 @@ Nguồn yêu cầu bắt buộc:
 
 ## 8. Docker, Makefile và môi trường local
 
-- [ ] `docker-compose.yml` chạy PostgreSQL.
-- [ ] `docker-compose.yml` chạy Redis.
-- [ ] `docker-compose.yml` chạy MinIO.
+- [x] `docker-compose.yml` chạy PostgreSQL.
+- [x] `docker-compose.yml` chạy Redis.
+- [x] `docker-compose.yml` chạy MinIO.
 - [ ] `docker-compose.yml` chạy backend.
 - [ ] `docker-compose.yml` chạy frontend.
 - [ ] `docker-compose.yml` chạy video worker.
-- [ ] Healthcheck cho service quan trọng.
-- [ ] Volume riêng cho PostgreSQL/MinIO.
-- [ ] `.env.example` đầy đủ biến môi trường dev.
-- [ ] Không commit `.env`.
-- [ ] Makefile có `make up`.
-- [ ] Makefile có `make down`.
-- [ ] Makefile có `make logs`.
-- [ ] Makefile có `make ps`.
+- [x] Healthcheck cho service quan trọng.
+- [x] Volume riêng cho PostgreSQL/MinIO.
+- [x] `.env.example` đầy đủ biến môi trường dev.
+- [x] Không commit `.env`.
+- [x] Makefile có `make up`.
+- [x] Makefile có `make down`.
+- [x] Makefile có `make logs`.
+- [x] Makefile có `make ps`.
 - [ ] Makefile có `make backend-test`.
 - [ ] Makefile có `make frontend-test`.
 - [ ] Makefile có `make worker-test`.
-- [ ] Makefile có `make test`.
+- [x] Makefile có `make test`.
 - [ ] Makefile có `make migrate`.
 - [ ] Makefile có `make seed`.
 - [ ] Makefile có `make clean` an toàn, không xóa dữ liệu production.
-- [ ] README hướng dẫn kết nối PostgreSQL bằng DBeaver.
+- [x] README hướng dẫn kết nối PostgreSQL bằng DBeaver.
 
 ## 9. Bảo mật, dữ liệu và tuân thủ
 
@@ -427,12 +427,12 @@ Nguồn yêu cầu bắt buộc:
 - [x] README dự án VinaClipAI.
 - [x] Quyết định kiến trúc hybrid.
 - [x] Quy ước commit/task.
-- [ ] Tạo cấu trúc thư mục mục tiêu.
+- [x] Tạo cấu trúc thư mục mục tiêu.
 
 ### Phase 1: Nền tảng hạ tầng và backend core
 
-- [ ] Docker Compose PostgreSQL/Redis/MinIO.
-- [ ] Makefile.
+- [x] Docker Compose PostgreSQL/Redis/MinIO.
+- [x] Makefile.
 - [ ] Spring Boot scaffold.
 - [ ] Migration baseline.
 - [ ] Auth/RBAC.
