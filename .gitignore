@@ -1,4 +1,5 @@
 .DS_Store
+.cache/
 .worktrees/
 # Local environment files
 .env
