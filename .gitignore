@@ -1,4 +1,5 @@
 .DS_Store
+.worktrees/
 /config.toml
 /config.toml.bak
 /storage/
